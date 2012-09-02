@@ -1,0 +1,3 @@
+# CodeIgniter Math Captcha
+
+A simple math based CAPTCHA for CodeIgniter. More informaiton to come soon...
