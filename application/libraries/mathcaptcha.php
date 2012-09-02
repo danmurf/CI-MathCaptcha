@@ -87,7 +87,7 @@ Class Mathcaptcha
      */
     private function numeric_to_string($number)
     {
-        if ($number >= MATHCAPTCHA_NUMERIC_TEXT_RANGE_LOW && $number <= MATHCAPTCHA_NUMERIC_TEXT_RANGE_HIGH)
+        if (is_numeric($number) && $number >= MATHCAPTCHA_NUMERIC_TEXT_RANGE_LOW && $number <= MATHCAPTCHA_NUMERIC_TEXT_RANGE_HIGH)
         {
             return $this->ci->lang->line('mathcaptcha_numeric_word_'.$number);
         }
