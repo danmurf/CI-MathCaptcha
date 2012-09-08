@@ -19,6 +19,8 @@ Some examples:
 
 > What is the sum of five and three?
 
+> Add ten to ten, what do you get?
+
 > What is seven plus six?
 
 or
