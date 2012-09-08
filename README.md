@@ -84,7 +84,7 @@ There are some configuration options which you can pass to the library in an ass
 *   **question_max_number_size**: The maximum number size to use in the question. The default is `10`, which is also the maximum allowed given the limitations of the language file.
 *   **answer_format**: The type of answer that is allowed; `word` means the user must answer in a word, `numeric` means the user must enter the number or `either` for, well, either.
 
-In order to make your installation of math CAPTCHA more unique you can try changing/adding more phrases to the language file. If you add more than 5, adjust the `MATHCAPTCHA_NUM_ADDITION_PHRASES` and `MATHCAPTCHA_NUM_MULTIPLICATION_PHRASES` appropriately.
+In order to make your installation of math CAPTCHA more unique you can try changing/adding more phrases to the language file. If you add more than 5, adjust the `MATHCAPTCHA_NUM_ADDITION_PHRASES` and `MATHCAPTCHA_NUM_MULTIPLICATION_PHRASES` constants in the library file appropriately.
 
 ##License
 
