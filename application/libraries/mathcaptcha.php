@@ -26,6 +26,12 @@ define('MATHCAPTCHA_NUMERIC_TEXT_RANGE_LOW',        0);
 define('MATHCAPTCHA_NUMERIC_TEXT_RANGE_HIGH',       100);
 
 /**
+ * The highest the numbers in the question can be. This is so that the answer
+ * does not exceed the number of the text range high, specified above.
+ */
+define('MATHCAPTCHA_MAX_QUESTION_NUMBER_SIZE',      10);
+
+/**
  * The number of phrases to randomly choose from. If you would like to add more,
  * simply adjust these numbers. If you would like to use only one phrase, change
  * the following number(s) to 1 and remove the unnecessary phrases from the
@@ -59,6 +65,12 @@ Class Mathcaptcha
      * @var string 'numeric', 'word' or 'random' 
      */
     private $question_format;
+    
+    /**
+     * The maximum size for each of the numbers in the question
+     * @var int
+     */
+    private $question_max_number_size;
     
     /**
      * The format of the number should be in the answer
@@ -139,6 +151,25 @@ Class Mathcaptcha
             $this->operation = 'word';
         }
         
+        //What should the maximum size of the numbers in the quesiton be?
+        if (isset($config['question_max_number_size']))
+        {
+            if ($config['question_max_number_size'] > 0 && $config['question_max_number_size'] <= MATHCAPTCHA_MAX_QUESTION_NUMBER_SIZE)
+            {
+                $this->question_max_number_size = $config['question_max_number_size'];
+            }
+            else
+            {
+                //Max question number size is out of range
+                return FALSE;
+            }
+        }
+        else
+        {
+            //The maxiumum number size wasn't specified - go with the maximum
+            $this->question_max_number_size = MATHCAPTCHA_MAX_QUESTION_NUMBER_SIZE;
+        }
+        
         //What answer format to accept?
         if (isset($config['answer_format']))
         {
@@ -171,6 +202,17 @@ Class Mathcaptcha
      * @return string|boolean The question to ask the user or FALSE if there was a problem
      */
     public function get_question()
+    {
+        
+    }
+    
+    /**
+     * Gets the phrase from the language file and injects the numbers
+     * @param string $phrase The phrase from the language file
+     * @param array $tokens An array of tokens to inject into the phrase
+     * @return string|boolean The fully formed CAPTCHA question or FALSE if there was a problem
+     */
+    private function compile_question($phrase, $tokens = array())
     {
         
     }
