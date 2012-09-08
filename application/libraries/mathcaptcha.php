@@ -22,14 +22,49 @@
  * you are using a custom language file with a greater range then please modify
  * appropriately.
  */
-define('MATHCAPTCHA_NUMERIC_TEXT_RANGE_LOW', 0);
-define('MATHCAPTCHA_NUMERIC_TEXT_RANGE_HIGH', 100);
+define('MATHCAPTCHA_NUMERIC_TEXT_RANGE_LOW',        0);
+define('MATHCAPTCHA_NUMERIC_TEXT_RANGE_HIGH',       100);
+
+/**
+ * The number of phrases to randomly choose from. If you would like to add more,
+ * simply adjust these numbers. If you would like to use only one phrase, change
+ * the following number(s) to 1 and remove the unnecessary phrases from the
+ * language file. The phrase will be randomly selected for each CAPTCHA question.
+ */
+define('MATHCAPTCHA_NUM_ADDITION_PHRASES',          5);
+define('MATHCAPTCHA_NUM_MULTIPLICATION_PHRASES',    5);
 
 Class Mathcaptcha
 {
+    /**
+     * Store the CodeIgniter super-object
+     * @var object $ci 
+     */
     private $ci;
     
+    /**
+     * Store the language the math captcha should be displayed in
+     * @var string CodeIgniter language setting
+     */
     private $language;
+   
+    /**
+     * The type of operation that should be performed for the math captcha
+     * @var string 'addition', 'multiplication' or 'random'
+     */
+    private $operation;
+    
+    /**
+     * The format of the numbers in the question
+     * @var string 'numeric', 'word' or 'random' 
+     */
+    private $question_format;
+    
+    /**
+     * The format of the number should be in the answer
+     * @var string 'numeric', 'word' or 'either'
+     */
+    private $answer_format;
     
     public function __construct() 
     {    

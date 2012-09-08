@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * Numbers 1 to 100
+ * Words for numbers 1 to 100
  */
 $lang['mathcaptcha_numeric_word_0'] = 'zero';
 $lang['mathcaptcha_numeric_word_1'] = 'one';
@@ -107,7 +107,7 @@ $lang['mathcaptcha_numeric_word_100'] = 'one hundred';
 
 
 /**
- * Addition of 2 numbers
+ * Addition phrases for two numbers
  */
 $lang['mathcaptcha_addition_2_1'] = 'What is !1 plus !2?';
 $lang['mathcaptcha_addition_2_2'] = 'Add together !1 and !2';
@@ -116,7 +116,7 @@ $lang['mathcaptcha_addition_2_4'] = 'Add !1 to !2, what do you get?';
 $lang['mathcaptcha_addition_2_5'] = 'What is the sum of !1 and !2?';
 
 /**
- * Multiplication of 2 numbers
+ * Multiplication phrases for two numbers
  */
 $lang['mathcaptcha_multiplication_2_1'] = 'What is !1 times !2?';
 $lang['mathcaptcha_multiplication_2_2'] = 'What is !1 multiplied by !2?';
