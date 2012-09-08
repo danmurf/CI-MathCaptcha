@@ -136,7 +136,7 @@ Class Mathcaptcha
                 case 'numeric' :
                 case 'word' :
                 case 'random' :
-                    $this->operation = $config['question_format'];
+                    $this->question_format = $config['question_format'];
                 break;
             
                 default :
@@ -148,7 +148,7 @@ Class Mathcaptcha
         else
         {
             //No question format was selected - go with words
-            $this->operation = 'word';
+            $this->question_format = 'word';
         }
         
         //What should the maximum size of the numbers in the quesiton be?
@@ -178,7 +178,7 @@ Class Mathcaptcha
                 case 'numeric' :
                 case 'word' :
                 case 'either' :
-                    $this->operation = $config['answer_format'];
+                    $this->answer_format = $config['answer_format'];
                 break;
             
                 default :
@@ -190,7 +190,7 @@ Class Mathcaptcha
         else
         {
             //No answer format was selected - go with either
-            $this->operation = 'either';
+            $this->answer_format = 'either';
         }
         
         //Done - go!
@@ -214,7 +214,7 @@ Class Mathcaptcha
         $number2 = rand(1, MATHCAPTCHA_MAX_QUESTION_NUMBER_SIZE);
         
         //Perform the operation and get the question phrase reference
-        switch($operation)
+        switch($this->operation)
         {
             case 'addition' :
                 $answer = $number1 + $number2;
@@ -232,8 +232,31 @@ Class Mathcaptcha
             break;
         }
         
+        //Should the numbers be translated into words?
+        switch($this->question_format)
+        {
+            case 'word':
+                //Both numbers should be words
+                $number1 = $this->numeric_to_string($number1);
+                $number2 = $this->numeric_to_string($number2);
+            break;
+        
+            case 'random' :
+                //The numbers should be randomly number/word
+                if (rand(1,2) == 1)
+                {
+                    $number1 = $this->numeric_to_string($number1);
+                }
+                
+                if (rand(1,2) == 1)
+                {
+                    $number2 = $this->numeric_to_string($number2);
+                }
+            break;
+        }
+        
         //Store the answer in flashdata
-        $this->ci->set_flashdata('mathcaptcha_answer', $answer);
+        $this->ci->session->set_flashdata('mathcaptcha_answer', $answer);
         
         //Return the CAPTCHA question
         return $this->compile_question($phrase, array($number1, $number2));
@@ -247,7 +270,13 @@ Class Mathcaptcha
      */
     private function compile_question($phrase, $tokens = array())
     {
+        $question_phrase = $this->ci->lang->line($phrase);
         
+        //Replace the numbers
+        $question_phrase = str_replace('!1', $tokens[0], $question_phrase);
+        $question_phrase = str_replace('!2', $tokens[1], $question_phrase);
+        
+        return $question_phrase;
     }
     
     /**
