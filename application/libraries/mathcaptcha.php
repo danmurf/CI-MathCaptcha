@@ -203,7 +203,40 @@ Class Mathcaptcha
      */
     public function get_question()
     {
+        if (strlen($this->question_format) == 0)
+        {
+            //Library hasn't been properly initialised
+            return FALSE;
+        }
         
+        //First, generate the two random numbers for the question
+        $number1 = rand(1, MATHCAPTCHA_MAX_QUESTION_NUMBER_SIZE);
+        $number2 = rand(1, MATHCAPTCHA_MAX_QUESTION_NUMBER_SIZE);
+        
+        //Perform the operation and get the question phrase reference
+        switch($operation)
+        {
+            case 'addition' :
+                $answer = $number1 + $number2;
+                $phrase = 'mathcaptcha_addition_2_'.rand(1, MATHCAPTCHA_NUM_ADDITION_PHRASES);
+            break;
+        
+            case 'multiplication' :
+                $answer = $number1 * $number2;
+                $phrase = 'mathcaptcha_multiplication_2_'.rand(1, MATHCAPTCHA_NUM_ADDITION_PHRASES);
+            break;
+        
+            default :
+                //Shouldn't end up here
+                return FALSE;
+            break;
+        }
+        
+        //Store the answer in flashdata
+        $this->ci->set_flashdata('mathcaptcha_answer', $answer);
+        
+        //Return the CAPTCHA question
+        return $this->compile_question($phrase, array($number1, $number2));
     }
     
     /**
