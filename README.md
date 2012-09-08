@@ -1,4 +1,4 @@
-# CodeIgniter Math Captcha v0.3 Alpha
+# CodeIgniter Math Captcha Library
 
 A simple math based CAPTCHA library for CodeIgniter with various configurable options.
 
