@@ -18,6 +18,19 @@
  */
 
 /**
+ * Math CAPTCHA Library
+ *
+ * A math CAPTCHA library for CodeIgniter.
+ *
+ * @package		CodeIgniter
+ * @subpackage          Libraries
+ * @category            Security
+ * @author		Dan Murfitt
+ * @link		http://twitter.com/danmurf
+ * @license             http://opensource.org/licenses/gpl-license.php GNU Public License (GPLv3)
+ */
+
+/**
  * This is the range of numbers that the mathcaptcha can convert to words. If
  * you are using a custom language file with a greater range then please modify
  * appropriately.
