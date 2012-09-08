@@ -1,5 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+ * Numbers 1 to 100
+ */
 $lang['mathcaptcha_numeric_word_0'] = 'zero';
 $lang['mathcaptcha_numeric_word_1'] = 'one';
 $lang['mathcaptcha_numeric_word_2'] = 'two';
@@ -101,6 +104,25 @@ $lang['mathcaptcha_numeric_word_97'] = 'ninety seven';
 $lang['mathcaptcha_numeric_word_98'] = 'ninety eight';
 $lang['mathcaptcha_numeric_word_99'] = 'ninety nine';
 $lang['mathcaptcha_numeric_word_100'] = 'one hundred';
+
+
+/**
+ * Addition of 2 numbers
+ */
+$lang['mathcaptcha_addition_2_1'] = 'What is !1 plus !2?';
+$lang['mathcaptcha_addition_2_2'] = 'Add together !1 and !2';
+$lang['mathcaptcha_addition_2_3'] = 'What do you get if you add !1 to !2?';
+$lang['mathcaptcha_addition_2_4'] = 'Add !1 to !2, what do you get?';
+$lang['mathcaptcha_addition_2_5'] = 'What is the sum of !1 and !2?';
+
+/**
+ * Multiplication of 2 numbers
+ */
+$lang['mathcaptcha_addition_2_1'] = 'What is !1 times !2?';
+$lang['mathcaptcha_addition_2_2'] = 'What is !1 multiplied by !2?';
+$lang['mathcaptcha_addition_2_3'] = 'Multiply !1 by !2, what do you get?';
+$lang['mathcaptcha_addition_2_4'] = 'What do you get if you multiply !1 by !2?';
+$lang['mathcaptcha_addition_2_5'] = 'What is the multiplication of !1 and !2?';
 
 /* End of file mathcaptcha_lang.php */
 /* Location: ./application/languages/english/mathcaptcha_lang.php */
