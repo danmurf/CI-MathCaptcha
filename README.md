@@ -24,24 +24,24 @@ The folder structure should match the CodeIgniter folder structure.
 3. If you would like to use another language other than English you will need to duplicate the language file and add translations the numbers and phrases respectively
 4. Initialise the math CAPTCHA library and include it in your controller. Example below:
 
-	public function myform()
-	{
-            $this->load->library('mathcaptcha');
-            $this->mathcaptcha->init();
+	    public function myform()
+	    {
+                $this->load->library('mathcaptcha');
+                $this->mathcaptcha->init();
             
-            $data['math_captcha_question'] = $this->mathcaptcha->get_question();
+                $data['math_captcha_question'] = $this->mathcaptcha->get_question();
             
-            $this->form_validation->set_rules('math_captcha', 'Math CAPTCHA', 'required|callback__check_math_captcha');
+                $this->form_validation->set_rules('math_captcha', 'Math CAPTCHA', 'required|callback__check_math_captcha');
             
-            if ($this->form_validation->run() == FALSE)
-            {
-                $this->load->view('myform', $data);
-            }
-            else
-            {
-                $this->load->view('myform', $data);
-            }
-	}
+                if ($this->form_validation->run() == FALSE)
+                {
+                    $this->load->view('myform', $data);
+                }
+                else
+                {
+                    $this->load->view('myform', $data);
+                }
+	    }
 
 5. Add a callback for the math CAPTCHA form validation if you are using CodeIgniter Form Validation library. Example below:
         
