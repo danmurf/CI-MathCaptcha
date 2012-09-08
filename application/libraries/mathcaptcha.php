@@ -76,7 +76,7 @@ Class Mathcaptcha
      * Initialise the library, gather the config (if set) and start the process
      * of calculating the math captcha
      * @param array $config An array of config items
-     * @return boolean TRUE if successful, FALSE if not
+     * @return boolean
      */
     public function init($config = array())
     {
@@ -93,7 +93,77 @@ Class Mathcaptcha
         }
         $this->ci->lang->load('mathcaptcha', $this->language);
 
+        //Which operation should the CAPTCHA use?
+        if (isset($config['operation']))
+        {
+            switch ($config['operation'])
+            {
+                case 'addition' :
+                case 'multiplication' :
+                case 'random' :
+                    $this->operation = $config['operation'];
+                break;
+            
+                default :
+                    //Unrecognised operation
+                    return FALSE;
+                break;
+            }
+        }
+        else
+        {
+            //No operation option was selected - go with addition
+            $this->operation = 'addition';
+        }
         
+        //What question format should be used?
+        if (isset($config['question_format']))
+        {
+            switch ($config['question_format'])
+            {
+                case 'numeric' :
+                case 'word' :
+                case 'random' :
+                    $this->operation = $config['question_format'];
+                break;
+            
+                default :
+                    //Unrecognised question format
+                    return FALSE;
+                break;
+            }
+        }
+        else
+        {
+            //No question format was selected - go with words
+            $this->operation = 'word';
+        }
+        
+        //What answer format to accept?
+        if (isset($config['answer_format']))
+        {
+            switch ($config['answer_format'])
+            {
+                case 'numeric' :
+                case 'word' :
+                case 'either' :
+                    $this->operation = $config['answer_format'];
+                break;
+            
+                default :
+                    //Unrecognised answer format
+                    return FALSE;
+                break;
+            }
+        }
+        else
+        {
+            //No answer format was selected - go with either
+            $this->operation = 'either';
+        }
+        
+        //Done - go!
+        return TRUE;
     }
     
     /**
