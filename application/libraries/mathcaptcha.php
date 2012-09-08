@@ -301,7 +301,6 @@ Class Mathcaptcha
                     {
                         return FALSE;
                     }
-                break;
             
                 case 'word' :
                     if (strcasecmp($answer, $this->numeric_to_string($mathcaptcha_answer)) == 0)
@@ -312,7 +311,6 @@ Class Mathcaptcha
                     {
                         return FALSE;
                     }
-                break;
             
                 case 'either' :
                     if ($answer == $mathcaptcha_answer ||
@@ -324,7 +322,6 @@ Class Mathcaptcha
                     {
                         return FALSE;
                     }
-                break;
             
                 default :
                     //Shoudln't end up here
