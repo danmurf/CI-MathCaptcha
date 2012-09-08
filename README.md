@@ -19,8 +19,8 @@ The folder structure should match the CodeIgniter folder structure.
 
 ###Quick setup
 
-1. Copy the application/libraries/mathcaptcha_library.php file to application/libraries/
-2. Copy the application/language/english/mathcaptcha_lang.php to application/language/english/
+1. Copy the `application/libraries/mathcaptcha_library.php` file to `application/libraries/`
+2. Copy the `application/language/english/mathcaptcha_lang.php` to `application/language/english/`
 3. If you would like to use another language other than English you will need to duplicate the language file and add translations the numbers and phrases respectively
 4. Initialise the math CAPTCHA library and include it in your controller. Example below:
 
