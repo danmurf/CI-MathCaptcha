@@ -9,10 +9,6 @@ A simple math based CAPTCHA library for CodeIgniter with various configurable op
 * Answers can be enforced to numeric, words or either
 * Add your own question phrases for added randomness
 
-##Requirements
-
-This library is designed to work with CodeIgniter's core Session library. I've tested it with the core Form Validation library, but see no reason why you couldn't use it with an alternative.
-
 Some examples:
 
 > What do you get if you add eight to five?
@@ -26,6 +22,10 @@ Some examples:
 or
 
 > What is 7 plus 6?
+
+##Requirements
+
+This library is designed to work with CodeIgniter's core Session library. I've tested it with the core Form Validation library, but see no reason why you couldn't use it with an alternative.
 
 ##Installation
 
