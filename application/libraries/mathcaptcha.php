@@ -286,7 +286,56 @@ Class Mathcaptcha
      */
     public function check_answer($answer)
     {
+        $mathcaptcha_answer = $this->ci->session->flashdata('mathcaptcha_answer');
         
+        if ($mathcaptcha_answer)
+        {
+            switch ($this->answer_format)
+            {
+                case 'numeric' :
+                    if ($answer == $mathcaptcha_answer)
+                    {
+                        return TRUE;
+                    }
+                    else
+                    {
+                        return FALSE;
+                    }
+                break;
+            
+                case 'word' :
+                    if (strcasecmp($answer, $this->numeric_to_string($mathcaptcha_answer)) == 0)
+                    {
+                        return TRUE;
+                    }
+                    else
+                    {
+                        return FALSE;
+                    }
+                break;
+            
+                case 'either' :
+                    if ($answer == $mathcaptcha_answer ||
+                        strcasecmp($answer, $this->numeric_to_string($mathcaptcha_answer)) == 0)
+                    {
+                        return TRUE;
+                    }
+                    else
+                    {
+                        return FALSE;
+                    }
+                break;
+            
+                default :
+                    //Shoudln't end up here
+                    return FALSE;
+            }
+        }
+        else
+        {
+            //Answer not present
+            return FALSE;
+        }
     }
     
     /**
