@@ -60,17 +60,17 @@ The folder structure should match the CodeIgniter folder structure.
 
 6. Print the `$mathcaptcha_question` on your form somewhere. Example below:
 
-    <?php echo validation_errors(); ?>
+        <?php echo validation_errors(); ?>
     
-    <?php echo form_open(); ?>
+        <?php echo form_open(); ?>
     
-        <?php echo $math_captcha_question;?>
+            <?php echo $math_captcha_question;?>
     
-        <?php echo form_input('math_captcha');?>
+            <?php echo form_input('math_captcha');?>
     
-        <?php echo form_submit('submit', 'Submit'); ?>
+            <?php echo form_submit('submit', 'Submit'); ?>
     
-    <?php echo form_close();?>
+        <?php echo form_close();?>
 
 And that's it!
 
@@ -83,6 +83,8 @@ There are some configuration options which you can pass to the library in an ass
 *   **question_format**: The type of number to include in the question; `numeric`, `word`, or `random`. This will default to `word` if not specified.
 *   **question_max_number_size**: The maximum number size to use in the question. The default is `10`, which is also the maximum allowed given the limitations of the language file.
 *   **answer_format**: The type of answer that is allowed; `word` means the user must answer in a word, `numeric` means the user must enter the number or `either` for, well, either.
+
+In order to make your installation of math CAPTCHA more unique you can try changing/adding more phrases to the language file. If you add more than 5, adjust the `MATHCAPTCHA_NUM_ADDITION_PHRASES` and `MATHCAPTCHA_NUM_MULTIPLICATION_PHRASES` appropriately.
 
 ##License
 
