@@ -13,6 +13,18 @@ A simple math based CAPTCHA library for CodeIgniter with various configurable op
 
 This library is designed to work with CodeIgniter's core Session library. I've tested it with the core Form Validation library, but see no reason why you couldn't use it with an alternative.
 
+Some examples:
+
+> What do you get if you add eight to five?
+
+> What is the sum of five and three?
+
+> What is seven plus six?
+
+or
+
+> What is 7 plus 6?
+
 ##Installation
 
 The folder structure should match the CodeIgniter folder structure.
@@ -21,7 +33,7 @@ The folder structure should match the CodeIgniter folder structure.
 
 1. Copy the `application/libraries/mathcaptcha_library.php` file to `application/libraries/`
 2. Copy the `application/language/english/mathcaptcha_lang.php` to `application/language/english/`
-3. If you would like to use another language other than English you will need to duplicate the language file and add translations the numbers and phrases respectively
+3. If you would like to use another language other than English you will need to duplicate the language file and translate the numbers and phrases respectively
 4. Initialise the math CAPTCHA library and include it in your controller. Example below:
 
 	    public function myform()
