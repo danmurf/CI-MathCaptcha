@@ -125,8 +125,11 @@ Class Mathcaptcha
             {
                 case 'addition' :
                 case 'multiplication' :
-                case 'random' :
                     $this->operation = $config['operation'];
+                break;
+
+                case 'random' :
+                    rand(1,2) == 1 ? $this->operation = 'addition' : $this->operation = 'multiplication';
                 break;
             
                 default :
