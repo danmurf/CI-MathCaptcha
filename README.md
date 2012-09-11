@@ -93,7 +93,7 @@ And that's it!
 There are some configuration options which you can pass to the library in an associative array when you `$this->mathcaptcha->init($config)`:
 
 *   **language**: This should be set to the language that you want to use. It will default to the language set in the Codeigniter `config.php`.
-*   **operation**: The type of math question to use; `addition` or `multiplication`. This will default to `addition` if not specified.
+*   **operation**: The type of math question to use; `addition`, `multiplication` or `random`. This will default to `addition` if not specified.
 *   **question_format**: The type of number to include in the question; `numeric`, `word`, or `random`. This will default to `word` if not specified.
 *   **question_max_number_size**: The maximum number size to use in the question. The default is `10`, which is also the maximum allowed given the limitations of the language file.
 *   **answer_format**: The type of answer that is allowed; `word` means the user must answer in a word, `numeric` means the user must enter the number or `either` for, well, either.
