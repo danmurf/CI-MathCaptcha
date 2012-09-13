@@ -226,8 +226,8 @@ Class Mathcaptcha
         }
         
         //First, generate the two random numbers for the question
-        $number1 = rand(1, MATHCAPTCHA_MAX_QUESTION_NUMBER_SIZE);
-        $number2 = rand(1, MATHCAPTCHA_MAX_QUESTION_NUMBER_SIZE);
+        $number1 = rand(1, $this->question_max_number_size);
+        $number2 = rand(1, $this->question_max_number_size);
         
         //Perform the operation and get the question phrase reference
         switch($this->operation)
