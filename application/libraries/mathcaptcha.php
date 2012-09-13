@@ -239,7 +239,7 @@ Class Mathcaptcha
         
             case 'multiplication' :
                 $answer = $number1 * $number2;
-                $phrase = 'mathcaptcha_multiplication_2_'.rand(1, MATHCAPTCHA_NUM_ADDITION_PHRASES);
+                $phrase = 'mathcaptcha_multiplication_2_'.rand(1, MATHCAPTCHA_NUM_MULTIPLICATION_PHRASES);
             break;
         
             default :
