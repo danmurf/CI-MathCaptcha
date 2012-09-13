@@ -134,5 +134,15 @@ $lang['mathcaptcha_multiplication_2_3'] = 'Multiply !1 by !2, what do you get?';
 $lang['mathcaptcha_multiplication_2_4'] = 'What do you get if you multiply !1 by !2?';
 $lang['mathcaptcha_multiplication_2_5'] = 'What is the multiplication of !1 and !2?';
 
+/**
+ * Division phrases for two numbers
+ * In this case !1 is a number we will divide
+ */
+$lang['mathcaptcha_division_2_1'] = 'Divide !1 by !2?';
+$lang['mathcaptcha_division_2_2'] = 'What is !1 divided by !2?';
+$lang['mathcaptcha_division_2_3'] = 'Divide !1 by !2, what do you get?';
+$lang['mathcaptcha_division_2_4'] = 'What do yiu get if you divide !1 by !2?';
+$lang['mathcaptcha_division_2_5'] = 'What is the division of !1 by !2?';
+
 /* End of file mathcaptcha_lang.php */
 /* Location: ./application/languages/english/mathcaptcha_lang.php */

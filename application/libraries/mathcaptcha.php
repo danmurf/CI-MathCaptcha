@@ -53,6 +53,7 @@ define('MATHCAPTCHA_MAX_QUESTION_NUMBER_SIZE',      10);
 define('MATHCAPTCHA_NUM_ADDITION_PHRASES',          5);
 define('MATHCAPTCHA_NUM_SUBTRACTION_PHRASES',       5);
 define('MATHCAPTCHA_NUM_MULTIPLICATION_PHRASES',    5);
+define('MATHCAPTCHA_NUM_DIVISION_PHRASES',          5);
 
 Class Mathcaptcha
 {
@@ -127,11 +128,12 @@ Class Mathcaptcha
                 case 'addition' :
                 case 'subtraction' :
                 case 'multiplication' :
+                case 'division' :
                     $this->operation = $config['operation'];
                 break;
 
                 case 'random' :
-                    switch (rand(1,3))
+                    switch (rand(1,4))
                     {
                         case 1 :
                             $this->operation = 'addition';
@@ -143,6 +145,10 @@ Class Mathcaptcha
 
                         case 3 :
                             $this->operation = 'multiplication';
+                        break;
+
+                        case 4 :
+                            $this->operation = 'division';
                         break;
                     }       
                 break;
@@ -240,9 +246,33 @@ Class Mathcaptcha
             return FALSE;
         }
         
-        //First, generate the two random numbers for the question
-        $number1 = rand(1, $this->question_max_number_size);
-        $number2 = rand(1, $this->question_max_number_size);
+        //Check what type of operation is performed
+        if ($this->operation != 'division')
+        {
+            //First, generate the two random numbers for the question
+            $number1 = rand(1, $this->question_max_number_size);
+            $number2 = rand(1, $this->question_max_number_size);
+        }
+        else
+        {
+            //Generate first random number for qustion 
+            $number1 = rand(1, $this->question_max_number_size);
+            $dividers = array();
+            
+            //Loop through all possible numbers
+            for ($i = 1; $i <= $this->question_max_number_size; $i++)
+            {
+                //Pick numbers with modulo = 0 for division array
+                if ($number1 % $i == 0)
+                {
+                    $dividers[] = $i;
+                }               
+            }
+            //Get random key from dividers array
+            $random_key = array_rand($dividers);
+            //Now pick second number for question 
+            $number2 = $dividers[$random_key];
+        }
         
         //Perform the operation and get the question phrase reference
         switch($this->operation)
@@ -260,6 +290,11 @@ Class Mathcaptcha
             case 'multiplication' :
                 $answer = $number1 * $number2;
                 $phrase = 'mathcaptcha_multiplication_2_'.rand(1, MATHCAPTCHA_NUM_MULTIPLICATION_PHRASES);
+            break;
+
+            case 'division' :           
+                $answer = $number1 / $number2;
+                $phrase = 'mathcaptcha_division_2_'.rand(1, MATHCAPTCHA_NUM_DIVISION_PHRASES);
             break;
         
             default :
