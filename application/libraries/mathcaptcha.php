@@ -123,6 +123,15 @@ Class Mathcaptcha
         //Which operation should the CAPTCHA use?
         if (isset($config['operation']))
         {
+            //Multiple to choose? Get one from given array
+            if (is_array($config['operation']))
+            {
+                //Get random key from operation array
+                $random_key = array_rand($config['operation']);
+                //Now pick operation name and use it
+                $config['operation'] = $config['operation'][$random_key];
+            }
+            
             switch ($config['operation'])
             {
                 case 'addition' :
