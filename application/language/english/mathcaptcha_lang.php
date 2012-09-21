@@ -116,6 +116,16 @@ $lang['mathcaptcha_addition_2_4'] = 'Add !1 to !2, what do you get?';
 $lang['mathcaptcha_addition_2_5'] = 'What is the sum of !1 and !2?';
 
 /**
+ * Subraction phrases for two numbers
+ * In this case !2 is always >= !1
+ */
+$lang['mathcaptcha_subtraction_2_1'] = 'What is !2 minus !1?';
+$lang['mathcaptcha_subtraction_2_2'] = 'Substract !1 from !2';
+$lang['mathcaptcha_subtraction_2_3'] = 'Substract !1 from !2, what do you get?';
+$lang['mathcaptcha_subtraction_2_4'] = 'What do you get if you substract !1 from !2?';
+$lang['mathcaptcha_subtraction_2_5'] = 'What is the substraction !1 from !2?';
+
+/**
  * Multiplication phrases for two numbers
  */
 $lang['mathcaptcha_multiplication_2_1'] = 'What is !1 times !2?';
@@ -123,6 +133,16 @@ $lang['mathcaptcha_multiplication_2_2'] = 'What is !1 multiplied by !2?';
 $lang['mathcaptcha_multiplication_2_3'] = 'Multiply !1 by !2, what do you get?';
 $lang['mathcaptcha_multiplication_2_4'] = 'What do you get if you multiply !1 by !2?';
 $lang['mathcaptcha_multiplication_2_5'] = 'What is the multiplication of !1 and !2?';
+
+/**
+ * Division phrases for two numbers
+ * In this case !1 is a number we will divide
+ */
+$lang['mathcaptcha_division_2_1'] = 'Divide !1 by !2?';
+$lang['mathcaptcha_division_2_2'] = 'What is !1 divided by !2?';
+$lang['mathcaptcha_division_2_3'] = 'Divide !1 by !2, what do you get?';
+$lang['mathcaptcha_division_2_4'] = 'What do yiu get if you divide !1 by !2?';
+$lang['mathcaptcha_division_2_5'] = 'What is the division of !1 by !2?';
 
 /* End of file mathcaptcha_lang.php */
 /* Location: ./application/languages/english/mathcaptcha_lang.php */

@@ -51,7 +51,9 @@ define('MATHCAPTCHA_MAX_QUESTION_NUMBER_SIZE',      10);
  * language file. The phrase will be randomly selected for each CAPTCHA question.
  */
 define('MATHCAPTCHA_NUM_ADDITION_PHRASES',          5);
+define('MATHCAPTCHA_NUM_SUBTRACTION_PHRASES',       5);
 define('MATHCAPTCHA_NUM_MULTIPLICATION_PHRASES',    5);
+define('MATHCAPTCHA_NUM_DIVISION_PHRASES',          5);
 
 Class Mathcaptcha
 {
@@ -121,15 +123,43 @@ Class Mathcaptcha
         //Which operation should the CAPTCHA use?
         if (isset($config['operation']))
         {
+            //Multiple to choose? Get one from given array
+            if (is_array($config['operation']))
+            {
+                //Get random key from operation array
+                $random_key = array_rand($config['operation']);
+                //Now pick operation name and use it
+                $config['operation'] = $config['operation'][$random_key];
+            }
+            
             switch ($config['operation'])
             {
                 case 'addition' :
+                case 'subtraction' :
                 case 'multiplication' :
+                case 'division' :
                     $this->operation = $config['operation'];
                 break;
 
                 case 'random' :
-                    rand(1,2) == 1 ? $this->operation = 'addition' : $this->operation = 'multiplication';
+                    switch (rand(1,4))
+                    {
+                        case 1 :
+                            $this->operation = 'addition';
+                        break;
+
+                        case 2 :
+                            $this->operation = 'subtraction';
+                        break;
+
+                        case 3 :
+                            $this->operation = 'multiplication';
+                        break;
+
+                        case 4 :
+                            $this->operation = 'division';
+                        break;
+                    }       
                 break;
             
                 default :
@@ -225,9 +255,33 @@ Class Mathcaptcha
             return FALSE;
         }
         
-        //First, generate the two random numbers for the question
-        $number1 = rand(1, MATHCAPTCHA_MAX_QUESTION_NUMBER_SIZE);
-        $number2 = rand(1, MATHCAPTCHA_MAX_QUESTION_NUMBER_SIZE);
+        //Check what type of operation is performed
+        if ($this->operation != 'division')
+        {
+            //First, generate the two random numbers for the question
+            $number1 = rand(1, $this->question_max_number_size);
+            $number2 = rand(1, $this->question_max_number_size);
+        }
+        else
+        {
+            //Generate first random number for qustion 
+            $number1 = rand(1, $this->question_max_number_size);
+            $dividers = array();
+            
+            //Loop through all possible numbers
+            for ($i = 1; $i <= $this->question_max_number_size; $i++)
+            {
+                //Pick numbers with modulo = 0 for division array
+                if ($number1 % $i == 0)
+                {
+                    $dividers[] = $i;
+                }               
+            }
+            //Get random key from dividers array
+            $random_key = array_rand($dividers);
+            //Now pick second number for question 
+            $number2 = $dividers[$random_key];
+        }
         
         //Perform the operation and get the question phrase reference
         switch($this->operation)
@@ -236,10 +290,20 @@ Class Mathcaptcha
                 $answer = $number1 + $number2;
                 $phrase = 'mathcaptcha_addition_2_'.rand(1, MATHCAPTCHA_NUM_ADDITION_PHRASES);
             break;
+
+            case 'subtraction' :
+                $answer = ($number1 > $number2) ? $number1 - $number2 : $number2 - $number1;
+                $phrase = 'mathcaptcha_subtraction_2_'.rand(1, MATHCAPTCHA_NUM_SUBTRACTION_PHRASES);
+            break;
         
             case 'multiplication' :
                 $answer = $number1 * $number2;
-                $phrase = 'mathcaptcha_multiplication_2_'.rand(1, MATHCAPTCHA_NUM_ADDITION_PHRASES);
+                $phrase = 'mathcaptcha_multiplication_2_'.rand(1, MATHCAPTCHA_NUM_MULTIPLICATION_PHRASES);
+            break;
+
+            case 'division' :           
+                $answer = $number1 / $number2;
+                $phrase = 'mathcaptcha_division_2_'.rand(1, MATHCAPTCHA_NUM_DIVISION_PHRASES);
             break;
         
             default :
@@ -247,50 +311,58 @@ Class Mathcaptcha
                 return FALSE;
             break;
         }
+               
+        //Store the answer in flashdata
+        $this->ci->session->set_flashdata('mathcaptcha_answer', $answer);
         
+        if (($this->operation == 'subtraction') && ($number1 > $number2))
+        {       
+            //Return the CAPTCHA question but with reversed numbers
+            return $this->compile_question($phrase, array($number2, $number1));
+        }
+        else
+        {
+            //Return the CAPTCHA question
+            return $this->compile_question($phrase, array($number1, $number2));
+        }
+    }
+    
+    /**
+     * Gets the phrase from the language file and injects the numbers
+     * @param string $phrase The phrase from the language file
+     * @param array $numbers An array of numbers to inject into the phrase
+     * @return string|boolean The fully formed CAPTCHA question or FALSE if there was a problem
+     */
+    private function compile_question($phrase, $numbers = array())
+    {
         //Should the numbers be translated into words?
         switch($this->question_format)
         {
             case 'word':
                 //Both numbers should be words
-                $number1 = $this->numeric_to_string($number1);
-                $number2 = $this->numeric_to_string($number2);
+                $numbers[0] = $this->numeric_to_string($numbers[0]);
+                $numbers[1] = $this->numeric_to_string($numbers[1]);
             break;
         
             case 'random' :
                 //The numbers should be randomly number/word
                 if (rand(1,2) == 1)
                 {
-                    $number1 = $this->numeric_to_string($number1);
+                    $numbers[0] = $this->numeric_to_string($numbers[0]);
                 }
                 
                 if (rand(1,2) == 1)
                 {
-                    $number2 = $this->numeric_to_string($number2);
+                    $numbers[1] = $this->numeric_to_string($numbers[1]);
                 }
             break;
         }
-        
-        //Store the answer in flashdata
-        $this->ci->session->set_flashdata('mathcaptcha_answer', $answer);
-        
-        //Return the CAPTCHA question
-        return $this->compile_question($phrase, array($number1, $number2));
-    }
-    
-    /**
-     * Gets the phrase from the language file and injects the numbers
-     * @param string $phrase The phrase from the language file
-     * @param array $tokens An array of tokens to inject into the phrase
-     * @return string|boolean The fully formed CAPTCHA question or FALSE if there was a problem
-     */
-    private function compile_question($phrase, $tokens = array())
-    {
+
         $question_phrase = $this->ci->lang->line($phrase);
         
         //Replace the numbers
-        $question_phrase = str_replace('!1', $tokens[0], $question_phrase);
-        $question_phrase = str_replace('!2', $tokens[1], $question_phrase);
+        $question_phrase = str_replace('!1', $numbers[0], $question_phrase);
+        $question_phrase = str_replace('!2', $numbers[1], $question_phrase);
         
         return $question_phrase;
     }
@@ -304,12 +376,12 @@ Class Mathcaptcha
     {
         $mathcaptcha_answer = $this->ci->session->flashdata('mathcaptcha_answer');
         
-        if ($mathcaptcha_answer)
+        if ($mathcaptcha_answer !== FALSE)
         {
             switch ($this->answer_format)
             {
                 case 'numeric' :
-                    if ($answer == $mathcaptcha_answer)
+                    if ($answer === (string) $mathcaptcha_answer)
                     {
                         return TRUE;
                     }
@@ -329,7 +401,7 @@ Class Mathcaptcha
                     }
             
                 case 'either' :
-                    if ($answer == $mathcaptcha_answer ||
+                    if ($answer === (string) $mathcaptcha_answer ||
                         strcasecmp($answer, $this->numeric_to_string($mathcaptcha_answer)) == 0)
                     {
                         return TRUE;
