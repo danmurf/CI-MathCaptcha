@@ -100,6 +100,10 @@ There are some configuration options which you can pass to the library in an ass
 
 In order to make your installation of math CAPTCHA more unique you can try changing/adding more phrases to the language file. If you add more than 5, adjust the `MATHCAPTCHA_NUM_ADDITION_PHRASES` and `MATHCAPTCHA_NUM_MULTIPLICATION_PHRASES` constants in the library file appropriately.
 
+##Thank you
+
+Many thanks to Nico Zimmermann and Michał Śniatała for contributing with code and translations :)
+
 ##License
 
 GNU General Public License
