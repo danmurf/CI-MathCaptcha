@@ -23,15 +23,15 @@ or
 
 > What is 7 plus 6?
 
-##Requirements
+## Requirements
 
 This library is designed to work with CodeIgniter's core Session library. I've tested it with the core Form Validation library, but see no reason why you couldn't use it with an alternative.
 
-##Installation
+## Installation
 
 The folder structure should match the CodeIgniter folder structure.
 
-###Quick setup
+### Quick setup
 
 1. Copy the `application/libraries/mathcaptcha_library.php` file to `application/libraries/`
 2. Copy the `application/language/english/mathcaptcha_lang.php` to `application/language/english/`
@@ -88,7 +88,7 @@ The folder structure should match the CodeIgniter folder structure.
 
 And that's it!
 
-##Configuration options
+## Configuration options
 
 There are some configuration options which you can pass to the library in an associative array when you `$this->mathcaptcha->init($config)`:
 
@@ -100,11 +100,11 @@ There are some configuration options which you can pass to the library in an ass
 
 In order to make your installation of math CAPTCHA more unique you can try changing/adding more phrases to the language file. If you add more than 5, adjust the `MATHCAPTCHA_NUM_ADDITION_PHRASES` and `MATHCAPTCHA_NUM_MULTIPLICATION_PHRASES` constants in the library file appropriately.
 
-##Thank you
+## Thank you
 
 Many thanks to Nico Zimmermann and Michał Śniatała for contributing with code and translations :)
 
-##License
+## License
 
 GNU General Public License
 
